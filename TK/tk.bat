@@ -115,17 +115,15 @@ goto done
 
 :anti_virus_removal_help 
 echo Antivirus removal tool commands: 
-echo ------------------------------------------
-echo nrt       - Norton Removal Tool 
-echo mrt       - Mcafee Removal Tool 
-echo art       - Avast Removal Tool 
-echo krt       - Kaspersky Removal Tool 
-echo wrt       - WebRoot Removal Tool 
+echo nrt - Norton Removal Tool 
+echo mrt - Mcafee Removal Tool 
+echo art - Avast Removal Tool 
+echo krt - Kaspersky Removal Tool 
+echo wrt - WebRoot Removal Tool 
 goto done 
 
 :help
 echo Available commands: 
-echo ------------------------------------------
 echo checkapps - Record installed applications, then compare to after tuneup
 echo cc        - CCleaner 
 echo tfcold    - Temporary File Cleaner 
@@ -143,11 +141,9 @@ echo java      - Install java (offline installer)
 echo javara    - Java Remover
 echo esr       - ESET service repair 
 echo kb        - Kill browsers 
-echo ------------------------------------------
 echo mbamun    - Remove Malwarebytes
 echo mbarun    - Remove MBAR from Desktop
 echo eclear    - Clear Events 
-echo ------------------------------------------
 echo autoruns  - Autoruns
 echo sigcheck  - Verifiy a files signature or upload it to virustotal.com
 echo listdlls  - View running processes and the DLL's they have loaded
@@ -164,15 +160,20 @@ echo        tk mbam X  (Deletes previous downloaded file)
 echo        tk rhelp (Removal tool list)
 goto done
 
-rem You can create as many commaands as you want juse use the following template
-rem UNZIP_FIRST  - Does the file need to be decompressed first YES / NO
-rem   FILE_NAME  - Save the file as tool.exe   
-rem FIRST_LINK=  - Where to get the file from - http://linktothefile.com/file/monkies.exe
-rem SECOND_LINK  - Same as above, but runs if the first link is down
-rem INSTALL_CMD  - Command to run to install the program or NONE if its not required. 
-rem INSTALL_ARGS - If required, default is empty
-rem LAUNCH_CMD   - Command to run after install can be set to NONE
-rem LAUNCH_ARGS  - If required, default is empty
+rem Add new commands here
+rem Make sure goto the approipiate label after setting up your command
+rem IE goto download_file  or goto done
+rem All variables are pre-set, no need to set them if its not required
+rem
+rem set UNZIP_FIRST=YES if you need your tool unzipped after downloading.
+rem The downloaded file is always saved as %FILE_NAME% environment variable
+
+rem :new_tool
+rem set FILE_NAME=new_tool.exe 
+rem set FIRST_LINK=http://toolhost.com/tool.exe
+rem set SECOND_LINK=http://anothersitehost.org/new_tool.exe
+rem set LAUNCH_CMD=%VSCAN%\new_tool.exe
+rem [========== ADD NEW COMMANDS BELOW HERE ======== ]
 
 :kill_browsers
 taskkill /f /im iexplore.exe
@@ -196,7 +197,6 @@ echo File Missing: check_apps.vbs
 echo File Missing: check_apps.vbs >> %LOG_FILE% 
 )
 goto done  
-
 
 :norton_removal_tool 
 set FILE_NAME=nrt.exe
